@@ -8,7 +8,6 @@ import 'package:webviewflutter/Screens/inputscreen.dart';
 const kAndroidUserAgent =
     'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36';
 
-// ignore: prefer_collection_literals
 final Set<JavascriptChannel> jsChannels = [
   JavascriptChannel(
       name: 'Print', onMessageReceived: (JavascriptMessage message) {}),
@@ -22,16 +21,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // Instance of WebView plugin
   final flutterWebViewPlugin = FlutterWebviewPlugin();
 
-  // On destroy stream
   StreamSubscription _onDestroy;
 
-  // On urlChanged stream
   StreamSubscription<String> _onUrlChanged;
 
-  // On urlChanged stream
   StreamSubscription<WebViewStateChanged> _onStateChanged;
 
   StreamSubscription<WebViewHttpError> _onHttpError;
@@ -44,25 +39,26 @@ class _MyHomePageState extends State<MyHomePage> {
   double progressof = 0.0;
   final _history = [];
   bool isLoading = false;
-  String url;
+  String url = "www.google.com/";
   @override
   void initState() {
-    url = widget.selectedUrl;
+    if (widget.selectedUrl == null) {
+      url = url;
+    } else {
+      url = widget.selectedUrl;
+    }
+
     super.initState();
 
     flutterWebViewPlugin.close();
 
-    // Add a listener to on destroy WebView, so you can make came actions.
     _onDestroy = flutterWebViewPlugin.onDestroy.listen((_) {
       if (mounted) {
-        // Actions like show a info toast.
-
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('Webview Destroyed')));
       }
     });
 
-    // Add a listener to on url changed
     _onUrlChanged = flutterWebViewPlugin.onUrlChanged.listen((String url) {
       setState(() {
         isLoading = true;
@@ -137,7 +133,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() async {
-    // Every listener should be canceled, the same should be done with this stream.
     _onDestroy.cancel();
     _onUrlChanged.cancel();
     _onStateChanged.cancel();
@@ -288,14 +283,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Expanded(
                   child: WebviewScaffold(
-                    url: "https://${url ?? "www.google.com"}",
+                    url: "https://$url ",
                     javascriptChannels: jsChannels,
                     mediaPlaybackRequiresUserGesture: false,
                     withZoom: true,
                     withLocalStorage: true,
                     hidden: true,
                     initialChild: Container(
-                      // color: Colors.redAccent,
                       child: const Center(
                         child: Text('loading.....'),
                       ),

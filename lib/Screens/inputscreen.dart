@@ -38,19 +38,35 @@ class _InputScreenState extends State<InputScreen> {
                 InkWell(
                   splashColor: Colors.blue,
                   onTap: () {
+                    //https://www.google.com/search?q=" + 'jahangir'
                     if (urlController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MyHomePage(
-                              selectedUrl: urlController.text ?? 'google.com',
-                            );
-                          },
-                        ),
-                      );
+                      if (!urlController.text.contains('.') ||
+                          urlController.text.contains(' ')) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return MyHomePage(
+                                selectedUrl: "www.google.com/search?q=" +
+                                    '${urlController.text}',
+                              );
+                            },
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return MyHomePage(
+                                selectedUrl: urlController.text ?? 'google.com',
+                              );
+                            },
+                          ),
+                        );
+                      }
                     }
                   },
                   child: Container(

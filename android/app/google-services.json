@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "465786514534",
+    "project_id": "fir-andmessaging",
+    "storage_bucket": "fir-andmessaging.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465786514534:android:7d3f98b023e4f7db5491a7",
+        "android_client_info": {
+          "package_name": "com.example.webviewflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465786514534-lkkj6dufmi41pfd4tlcol4p8cubotts7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByKYrHQnEd65ez1o0zsoTzJLDzqkeOQ7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465786514534-lkkj6dufmi41pfd4tlcol4p8cubotts7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
